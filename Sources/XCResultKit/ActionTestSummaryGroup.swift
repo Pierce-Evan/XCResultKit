@@ -22,8 +22,8 @@ public struct ActionTestSummaryGroup: XCResultObject {
     
     public init?(_ json: [String: AnyObject]) {
         do {
-            name = try xcRequired(element: "name", from: json)
-            identifier = try xcRequired(element: "identifier", from: json)
+            name = xcOptional(element: "name", from: json) ?? ""
+            identifier = xcOptional(element: "identifier", from: json) ?? ""
             duration = xcOptional(element: "duration", from: json) ?? 0.0
             subtestGroups = xcArray(element: "subtests", from: json)
                 .ofType(ActionTestSummaryGroup.self)
